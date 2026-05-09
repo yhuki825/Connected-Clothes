@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="コネクテットクロースは、ホームページ制作と中古品販売を通じて、事業と価値のつながりを丁寧に設計する個人事業です。" />
+  <title>コネクテットクロース | 事業と価値を、丁寧につなぐ。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /*
+      Design Philosophy: Quiet Luxury Editorial.
+      This file uses restrained typography, generous whitespace, hairline borders,
+      warm paper tones, and calm editorial motion to express trust and craft.
+    */
+    :root {
+      --ink: #1d2528;
+      --ink-soft: #3f4a4d;
+      --muted: #74716b;
+      --paper: #f7f2e8;
+      --paper-deep: #eee4d3;
+      --white: #fffdf8;
+      --line: rgba(29, 37, 40, 0.16);
+      --line-strong: rgba(29, 37, 40, 0.32);
+      --green: #1f4b46;
+      --green-soft: #dce7df;
+      --sand: #c7ab78;
+      --shadow: 0 24px 70px rgba(29, 37, 40, 0.12);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(199, 171, 120, 0.18), transparent 32rem),
+        linear-gradient(180deg, var(--paper) 0%, #fbf8f1 48%, var(--white) 100%);
+      font-family: "Noto Serif JP", serif;
+      letter-spacing: 0.02em;
+      line-height: 1.9;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: 0.38;
+      background-image:
+        linear-gradient(rgba(29, 37, 40, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(29, 37, 40, 0.018) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 78%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .site-shell {
+      width: min(100% - 40px, 1180px);
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      z-index: 20;
+      width: min(calc(100% - 32px), 1180px);
+      transform: translateX(-50%);
+      border: 1px solid rgba(29, 37, 40, 0.12);
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 18px 50px rgba(29, 37, 40, 0.08);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      padding: 0 24px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand__en {
+      font-family: "Outfit", sans-serif;
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.19em;
+    }
+
+    .brand__ja {
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      font-family: "Outfit", "Noto Serif JP", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 10px 0;
+      color: var(--ink-soft);
+    }
+
+    .nav-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      left: 0;
+      height: 1px;
+      content: "";
+      background: var(--green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s var(--ease);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 158px 0 92px;
+    }
+
+    .hero::after {
+      position: absolute;
+      right: 6vw;
+      bottom: 64px;
+      width: 1px;
+      height: 148px;
+      content: "";
+      background: var(--line-strong);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+      gap: clamp(38px, 7vw, 92px);
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      margin: 0 0 26px;
+      color: var(--green);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 48px;
+      height: 1px;
+      content: "";
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero-title {
+      max-width: 720px;
+      margin-bottom: 30px;
+      font-size: clamp(3rem, 8vw, 7.2rem);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+    }
+
+    .hero-title .serif-en {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-copy {
+      max-width: 560px;
+      margin-bottom: 36px;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.7vw, 1.18rem);
+      line-height: 2.05;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
+      border: 1px solid var(--ink);
+      font-family: "Outfit", "Noto Serif JP", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      transition: color 0.45s var(--ease), background 0.45s var(--ease), transform 0.45s var(--ease), border-color 0.45s var(--ease);
+    }
+
+    .button--dark {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .button--dark:hover,
+    .button--dark:focus-visible {
+      color: var(--ink);
+      background: transparent;
+      transform: translateY(-2px);
+    }
+
+    .button--ghost:hover,
+    .button--ghost:focus-visible {
+      color: var(--white);
+      background: var(--green);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .hero-visual {
+      position: relative;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.52);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-visual::before {
+      position: absolute;
+      top: -22px;
+      right: -22px;
+      width: 44%;
+      height: 58%;
+      content: "";
+      border-top: 1px solid var(--line-strong);
+      border-right: 1px solid var(--line-strong);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      filter: saturate(0.88) contrast(0.98);
+    }
+
+    .visual-note {
+      position: absolute;
+      right: 34px;
+      bottom: 34px;
+      max-width: 230px;
+      padding: 20px;
+      border: 1px solid rgba(255, 253, 248, 0.58);
+      color: var(--white);
+      background: rgba(29, 37, 40, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .visual-note span {
+      display: block;
+      margin-bottom: 6px;
+      font-family: "Outfit", sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .visual-note p {
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.8;
+    }
+
+    .section {
+      padding: clamp(84px, 11vw, 150px) 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: grid;
+      /* grid-template-columns: 0.5fr 1.5fr; 一旦なしにするテスト */
+      gap: clamp(24px, 5vw, 84px);
+      align-items: start;
+      margin-bottom: clamp(38px, 7vw, 86px);
+    }
+
+    .section-label {
+      margin: 0;
+      color: var(--green);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      max-width: 1200px;
+      margin-bottom: 18px;
+      font-size: clamp(2.2rem, 5.6vw, 5.2rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+    }
+
+    .section-title em {
+      font-family: "Cormorant Garamond", serif;
+      font-style: italic;
+      letter-spacing: -0.03em;
+    }
+
+    .section-lead {
+      max-width: 1000px;
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-size: 1.03rem;
+      line-height: 2.05;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 5vw, 56px);
+    }
+
+    .service-card {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.68);
+      transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease), border-color 0.55s var(--ease);
+    }
+
+    .service-card:nth-child(2) {
+      margin-top: 58px;
+    }
+
+    .service-card:hover {
+      border-color: rgba(31, 75, 70, 0.42);
+      box-shadow: 0 24px 70px rgba(29, 37, 40, 0.10);
+      transform: translateY(-8px);
+    }
+
+    .service-image {
+      overflow: hidden;
+      padding: 14px 14px 0;
+    }
+
+    .service-image img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      filter: saturate(0.86);
+      transition: transform 1.2s var(--ease);
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.045);
+    }
+
+    .service-body {
+      padding: clamp(26px, 4vw, 42px);
+    }
+
+    .service-number {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--sand);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 3.8rem;
+      line-height: 0.72;
+    }
+
+    .service-body h3 {
+      margin-bottom: 16px;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .service-body p {
+      margin-bottom: 24px;
+      color: var(--ink-soft);
+      line-height: 2.02;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .feature-list li {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .feature-list li::before {
+      position: absolute;
+      top: 0.96em;
+      left: 0;
+      width: 12px;
+      height: 1px;
+      content: "";
+      background: var(--green);
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: clamp(30px, 6vw, 74px);
+      align-items: stretch;
+    }
+
+    .statement {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 460px;
+      padding: clamp(30px, 5vw, 56px);
+      color: var(--white);
+      background: var(--green);
+      overflow: hidden;
+    }
+
+    .statement::after {
+      position: absolute;
+      right: -90px;
+      bottom: -120px;
+      width: 320px;
+      height: 320px;
+      content: "";
+      border: 1px solid rgba(255, 253, 248, 0.22);
+      border-radius: 50%;
+    }
+
+    .statement p:first-child {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(2rem, 4.5vw, 4.2rem);
+      font-weight: 500;
+      line-height: 1.28;
+      letter-spacing: -0.055em;
+    }
+
+    .statement p:last-child {
+      position: relative;
+      z-index: 1;
+      max-width: 290px;
+      margin: 52px 0 0;
+      color: rgba(255, 253, 248, 0.72);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    .about-text {
+      display: grid;
+      align-content: center;
+      padding: clamp(28px, 5vw, 52px) 0;
+    }
+
+    .about-text p {
+      margin-bottom: 26px;
+      color: var(--ink-soft);
+      font-size: 1rem;
+      line-height: 2.15;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 20px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .profile-item span,
+    .info-item span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .profile-item strong,
+    .info-item strong {
+      display: block;
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.65;
+    }
+
+    .info-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+    }
+
+    .info-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .info-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 22px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-item p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.9;
+    }
+
+    .location-card {
+      position: sticky;
+      top: 128px;
+      padding: 32px;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.72);
+      box-shadow: 0 18px 60px rgba(29, 37, 40, 0.08);
+    }
+
+    .location-card .map-mark {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      min-height: 260px;
+      margin-bottom: 24px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(31, 75, 70, 0.12), rgba(199, 171, 120, 0.2)),
+        repeating-linear-gradient(90deg, transparent 0, transparent 23px, rgba(29, 37, 40, 0.045) 24px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 23px, rgba(29, 37, 40, 0.045) 24px);
+    }
+
+    .pin {
+      display: grid;
+      place-items: center;
+      width: 102px;
+      height: 102px;
+      color: var(--white);
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 18px 44px rgba(31, 75, 70, 0.22);
+      font-family: "Outfit", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .location-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.93rem;
+      line-height: 1.95;
+    }
+
+    .footer {
+      padding: 54px 0 60px;
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .footer-inner {
+      display: flex;
+      gap: 28px;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer-brand strong {
+      font-family: "Outfit", sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+    }
+
+    .footer-brand span,
+    .copyright {
+      color: rgba(255, 253, 248, 0.62);
+      font-family: "Outfit", "Noto Serif JP", sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        min-height: 70px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero-grid,
+      .section-heading,
+      .services,
+      .about-panel,
+      .info-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 128px;
+      }
+
+      .service-card:nth-child(2) {
+        margin-top: 0;
+      }
+
+      .statement {
+        min-height: 360px;
+      }
+
+      .location-card {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-shell {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .site-header {
+        top: 10px;
+        width: calc(100% - 20px);
+      }
+
+      .nav {
+        padding: 0 16px;
+      }
+
+      .brand__en {
+        font-size: 0.82rem;
+      }
+
+      .hero-title {
+        font-size: clamp(2.72rem, 17vw, 4.6rem);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .visual-note {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        max-width: none;
+        margin-top: 12px;
+        color: var(--ink);
+        background: rgba(255, 253, 248, 0.86);
+        border-color: var(--line);
+      }
+
+      .profile-grid,
+      .info-item {
+        grid-template-columns: 1fr;
+      }
+
+      .info-item {
+        gap: 8px;
+      }
+
+      .footer-inner {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" aria-label="サイトヘッダー">
+    <nav class="nav">
+      <a href="#top" class="brand" aria-label="CONNECTED CLOTHES トップへ戻る">
+        <span class="brand__en">CONNECTED CLOTHES</span>
+        <span class="brand__ja">コネクテットクロース</span>
+      </a>
+      <div class="nav-links" aria-label="主要ナビゲーション">
+        <a href="#services">Service</a>
+        <a href="#about">About</a>
+        <a href="#info">Info</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="site-shell hero-grid">
+        <div class="reveal">
+          <p class="eyebrow">Digital & Physical Value</p>
+          <h1 class="hero-title">
+            事業と価値を<span class="serif-en">quietly connect.</span>
+          </h1>
+          <p class="hero-copy">
+            コネクテットクロースは、ホームページ制作と中古品販売を通じて、
+            まだ見えきっていない価値を丁寧に見立て、必要とする人や事業へつなぐ個人事業です。
+          </p>
+          <div class="hero-actions">
+            <a class="button button--dark" href="#services">事業内容を見る</a>
+            <a class="button button--ghost" href="#info">基本情報を確認する</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="Web制作とリユースを表すビジュアル">
+          <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663384923944/GQwdqjLmiV6Bc97cpQi7D9/connected-clothes-hero-editorial-FryfPNrcXseT7NNv6KdrLB.webp" alt="ノートパソコン、布、道具が上質に配置されたワークスペース" />
+          <div class="visual-note">
+            <span>Thoughtful Work</span>
+            <p>デジタルの設計力と、モノの価値を見極める視点を、ひとつの姿勢で。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="site-shell">
+        <div class="section-heading reveal">
+          <p class="section-label">Service</p>
+          <div>
+            <h2 class="section-title">つくることと、受け継ぐことを、<br><em>同じ丁寧さで</em></h2>
+            <p class="section-lead">
+              事業の魅力を伝えるWebサイトづくりと、価値あるモノを次へ渡すリユース事業。<br>
+              異なる領域に見えても、根底にあるのは「必要な価値を、必要な場所へ届ける」という考え方です。
+            </p>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="service-card reveal">
+            <div class="service-image">
+              <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663384923944/GQwdqjLmiV6Bc97cpQi7D9/connected-clothes-web-service-Yq7wRmAz6S36q7BJpQicRT.webp" alt="Webサイト設計を表すノートとタブレット" loading="lazy" />
+            </div>
+            <div class="service-body">
+              <span class="service-number">01</span>
+              <h3>ホームページ制作</h3>
+              <p>
+                個人事業主様や中小企業様に向けて、事業の空気感や強みが自然に伝わるWebサイトを制作します。
+                見た目を整えるだけでなく、読みやすさ、導線、運用のしやすさまで考慮します。
+              </p>
+              <ul class="feature-list">
+                <li>スマートフォンでも読みやすいレスポンシブ設計</li>
+                <li>ブランドの印象に合わせたトーン設計</li>
+                <li>公開後の更新を見据えたシンプルな構造</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="service-card reveal">
+            <div class="service-image">
+              <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663384923944/GQwdqjLmiV6Bc97cpQi7D9/connected-clothes-reuse-service-LC97SDqz58To6NJPHqtUN2.webp" alt="丁寧に並べられた中古品と検品タグ" loading="lazy" />
+            </div>
+            <div class="service-body">
+              <span class="service-number">02</span>
+              <h3>中古品の販売</h3>
+              <p>
+                価値のあるモノを、次に必要とする人へ。
+                中古品の買取・販売を通じて、まだ使えるモノの魅力を見極め、安心して受け継がれる流れをつくります。
+              </p>
+              <ul class="feature-list">
+                <li>１点ずつ丁寧に確認する検品姿勢</li>
+                <li>適正な価値を意識した販売・提案</li>
+                <li>循環を前提にした持続可能な消費への貢献</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="site-shell">
+        <div class="section-heading reveal">
+          <p class="section-label">About</p>
+          <div>
+            <h2 class="section-title">屋号に込めたのは、<br><em>つながりを編む姿勢</em></h2>
+          </div>
+        </div>
+
+        <div class="about-panel">
+          <div class="statement reveal">
+            <p>見立て、<br>整え、<br>届ける</p>
+            <p>Connected Clothes / Since 2024 / Saitama</p>
+          </div>
+          <div class="about-text reveal">
+            <p>
+              「コネクテットクロース」という屋号には、モノと人、技術とビジネスを密接に結びつけるという願いが込められています。
+              Webサイト制作では事業の魅力を言葉と画面に整え、中古品販売では確かな価値を持つモノを次の使い手へ届けます。
+            </p>
+            <p>
+              一見異なる二つの事業ですが、どちらも「誰かの課題を解き、より良い選択肢へつなぐ」ための取り組みです。
+              小さな事業だからこそ、一つひとつの相談や商品に丁寧に向き合います。
+            </p>
+            <div class="profile-grid" aria-label="代表者と所在地">
+              <div class="profile-item">
+                <span>Representative</span>
+                <strong>篠田 滉一郎<br />Koichiro Shinoda</strong>
+              </div>
+              <div class="profile-item">
+                <span>Location</span>
+                <strong>埼玉県鶴ヶ島市五味ヶ谷</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="info" class="section">
+      <div class="site-shell info-layout">
+        <div>
+          <div class="section-heading reveal" style="grid-template-columns: 1fr; margin-bottom: 42px;">
+            <p class="section-label">Information</p>
+            <div>
+              <h2 class="section-title">基本情報</h2>
+              <p class="section-lead">
+                事業内容や所在地など、コネクテットクロースの概要を掲載しています。
+                詳細なご相談は、各種連絡手段にて個別にご案内いたします。
+              </p>
+            </div>
+          </div>
+
+          <div class="info-list reveal">
+            <div class="info-item">
+              <span>Trade Name</span>
+              <p><strong>コネクテットクロース</strong></p>
+            </div>
+            <div class="info-item">
+              <span>Address</span>
+              <p>〒350-2202<br />埼玉県鶴ヶ島市五味ヶ谷</p>
+            </div>
+            <div class="info-item">
+              <span>Business</span>
+              <p>ホームページの制作・運営支援<br />中古品の買取・販売・リユース事業</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="location-card reveal" aria-label="所在地情報">
+          <div class="map-mark" aria-hidden="true">
+            <div class="pin">Saitama</div>
+          </div>
+          <p>
+            詳細な所在地や訪問の可否については、必要に応じて個別にご案内いたします。
+            サイト上ではコンタクトフォームを設けず、シンプルな会社情報の掲載に留めています。
+          </p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="site-shell footer-inner">
+      <div class="footer-brand">
+        <strong>CONNECTED CLOTHES</strong>
+        <span>Connecting digital craft and physical value.</span>
+      </div>
+      <p class="copyright">&copy; 2026 Connected Clothes. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /*
+      Design Philosophy Reminder: Quiet Luxury Editorial interactions should remain calm.
+      Motion is limited to subtle reveal effects and smooth anchor navigation.
+    */
+    const revealTargets = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealTargets.forEach((target) => observer.observe(target));
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (event) => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (!target) return;
+        event.preventDefault();
+        const headerOffset = 110;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
